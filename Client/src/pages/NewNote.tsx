@@ -1,7 +1,6 @@
-import React from 'react'
-
+import '../styles/App.css';
 export const NewNote = () => {
   return (
-    <div>NewNote</div>
+    <div><h1>New Note</h1></div>
   )
 }
