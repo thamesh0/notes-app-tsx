@@ -19,6 +19,7 @@ app.get('/', (req: Request,res: Response) => {
 
 app.listen(port);
 console.log(`listening to port ${port}`)
+
 // app.use(cors());
 // app.use(express.json());
 // app.use(require("./routes/record"));
