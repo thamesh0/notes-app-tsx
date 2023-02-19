@@ -5,6 +5,8 @@ import cors from "cors";
 require("dotenv").config({ path: "./.env" });
 
 const app = express();
+
+
 app.use(cors());
 app.use(express.json())
 
@@ -21,9 +23,12 @@ app.get('/', (req: Request,res: Response) => {
     res.send("gg")
 })
 
-app.post('/decks',async (req: Request, res: Response)=> {
+app.post('/deck',async (req: Request, res: Response)=> {
     console.log(req.body)
-    const newDeck = new Deck(req.body);
+    const newDeck = new Deck({
+        title: req.body.title,
+        }
+    );
     const createdDeck =  await newDeck.save();
     res.json(createdDeck);
 })
