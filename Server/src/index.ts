@@ -1,11 +1,16 @@
-import express, { Request,Response} from "express";
+import express, { Request,Response } from "express";
 import mongoose from 'mongoose'
-// import dbo from "./db/conn";
+import Deck from './models/deck';
 import cors from "cors";
-const app = express();
-
 require("dotenv").config({ path: "./config.env" });
-const port = process.env.PORT || 5000;
+
+const app = express();
+app.use(cors());
+app.use(express.json())
+
+const port = process.env.PORT || 3000;
+const uri = process.env.API_URI || "";
+
 
 
 app.get('/hello', (req: Request,res: Response) => {
@@ -16,20 +21,15 @@ app.get('/', (req: Request,res: Response) => {
     res.send("gg")
 })
 
+app.post('/decks',async (req: Request, res: Response)=> {
+    console.log(req.body)
+    const newDeck = new Deck(req.body);
+    const createdDeck =  await newDeck.save();
+    res.json(createdDeck);
+})
 
-app.listen(port);
-console.log(`listening to port ${port}`)
-
-// app.use(cors());
-// app.use(express.json());
-// app.use(require("./routes/record"));
-// // get driver connection
- 
-// app.listen(port, () => {
-//   // perform a database connection when server starts
-//   dbo.connectToServer(function (err) {
-//     if (err) console.error(err);
- 
-//   });
-//   console.log(`Server is running on port: ${port}`);
-// });
+const db = mongoose.set('strictQuery',false).connect(uri).then(() => {
+    app.listen(port, () => {
+        console.log(`listening to port ${port}`)
+    });
+})
