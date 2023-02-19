@@ -2,14 +2,14 @@ import express, { Request,Response } from "express";
 import mongoose from 'mongoose'
 import Deck from './models/deck';
 import cors from "cors";
-require("dotenv").config({ path: "./config.env" });
+require("dotenv").config({ path: "./.env" });
 
 const app = express();
 app.use(cors());
 app.use(express.json())
 
 const port = process.env.PORT || 3000;
-const uri = process.env.API_URI || "";
+const uri = process.env.MONGO_URI || "";
 
 
 
