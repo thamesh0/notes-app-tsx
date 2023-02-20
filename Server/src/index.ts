@@ -23,6 +23,13 @@ app.get('/', (req: Request,res: Response) => {
     res.send("gg")
 })
 
+app.get('/get-deck', async (req:Request, res:Response) => {
+    //  Fetch all cards in the deck
+   const cards = await Deck.find(); // Fetches all the cards in a deck
+    //    console.log(cards); // prints all cards in a deck
+   res.json(cards)
+})
+
 app.post('/deck',async (req: Request, res: Response)=> {
     console.log(req.body)
     const newDeck = new Deck({
