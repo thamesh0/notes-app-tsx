@@ -55,17 +55,27 @@ input {
 	border-radius: 4px;
 }
 
-.App {
+.Home {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	min-height: 100vh;
 }
 
-.create-card {
+.create-deck-form > * {
 	margin: 10px;
 }
 
 .input-field {
 	padding: 5px;
+}
+
+.alert::after {
+	content: "Title can't be empty";
+	color: red;
+}
+
+.alert {
+	margin: 10px;
 }

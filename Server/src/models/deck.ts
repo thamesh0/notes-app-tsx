@@ -7,6 +7,6 @@ const deckSchema = new Schema({
   title:  String, // String is shorthand for {type: String}
 });
 
-const deckModel = mongoose.model("Deck",deckSchema, "cards")
+const deckModel = mongoose.model("Deck",deckSchema, "decks")
 
 export default deckModel;
