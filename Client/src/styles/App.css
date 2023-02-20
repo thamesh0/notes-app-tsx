@@ -27,20 +27,17 @@ h1 {
 	font-size: 3.2em;
 	line-height: 1.1;
 }
-
 button {
-	border-radius: 8px;
 	cursor: pointer;
-	padding: 0.6em 1.2em;
+	border: none;
+	border-radius: 8px;
+}
+.submit-button {
 	font-size: 1em;
 	font-weight: 500;
 	font-family: inherit;
-	border: 1px solid transparent;
+	padding: 0.6em 1.2em;
 	background-color: var(--btn-clr);
-	transition: border-color 0.25s;
-}
-button:hover {
-	border-color: var(--accent-border);
 }
 
 button:focus,
@@ -58,13 +55,16 @@ input {
 .Home {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	justify-content: center;
+	align-items: center;
 	min-height: 100vh;
+	gap: 20px;
 }
 
-.create-deck-form > * {
-	margin: 10px;
+.create-deck-form {
+	display: flex;
+	gap: 10px;
+	align-items: center;
 }
 
 .input-field {
@@ -78,4 +78,38 @@ input {
 
 .alert {
 	margin: 10px;
+}
+
+.decks {
+	gap: 10px;
+	display: grid;
+	width: 600px;
+	margin: 10px auto;
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.decks li {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 130px;
+	border-radius: 10px;
+	background: var(--btn-clr);
+	color: var(--txt-clr-dark);
+}
+.decks li:hover {
+	background: #eee;
+}
+
+.decks li button {
+	position: absolute;
+	font-size: 12px;
+	top: 5px;
+	right: 5px;
+}
+
+.decks li button:hover {
+	background-color: #fa4b4b;
+	color: white;
 }

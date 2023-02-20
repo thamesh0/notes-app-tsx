@@ -3,8 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
+  "nodemonConfig": {
+    "crash":"kill-port 5000",
+    "restart":"kill-port 5000",
+
+    "watch":["src/**"],
+    "ext":"ts,json",
+    "exec":"npx ts-node src/index.ts",
+    "ignore": ["src/**/*.spec.ts"],
+    "delay": 2500
+  },
   "scripts": {
-    "dev": "nodemon --watch \"src/**\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node src/index.ts\"",
+    "dev": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

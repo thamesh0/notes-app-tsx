@@ -3,9 +3,10 @@
 	--clr-bg: #242424;
 	--clr-dark: #333;
 
-	--txt-clr: rgba(255, 255, 255, 0.87);
+	--txt-clr: #ffffffde;
+	--txt-clr-dark: #333;
 
-	--btn-clr: #f2f2f2;
+	--btn-clr: #fff;
 
 	--accent: #535bf2;
 	--accent-border: #648cff;
