@@ -2,16 +2,29 @@ import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import Deck from "./models/deck";
 import cors from "cors";
+
 require("dotenv").config({ path: "./.env" });
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 
-const port = process.env.PORT || 3000;
-const uri = process.env.MONGO_URI || "";
+// ENVs
+const port: string = process.env.PORT || "3000";
+const uri: string = process.env.MONGO_URI || "";
 
+//
+// Connect to Database & Run the server
+const db: Promise<void> = mongoose
+	.set("strictQuery", false)
+	.connect(uri)
+	.then(() => {
+		app.listen(port, () => {
+			console.log(`listening to port ${port}`);
+		});
+	});
+
+// Server Api Endpoints
 app.get("/get-decks", async (req: Request, res: Response) => {
 	//  Fetch all cards in the deck
 	const decks = await Deck.find(); // Fetches all the cards in a deck
@@ -33,12 +46,3 @@ app.delete("/decks/:deckId", async (req: Request, res: Response) => {
 	const deletedDeck = await Deck.findByIdAndDelete(deckId);
 	res.json(deletedDeck);
 });
-
-const db = mongoose
-	.set("strictQuery", false)
-	.connect(uri)
-	.then(() => {
-		app.listen(port, () => {
-			console.log(`listening to port ${port}`);
-		});
-	});
