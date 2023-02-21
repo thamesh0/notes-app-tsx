@@ -4,7 +4,7 @@ import Deck from "../models/deck";
 export async function getDecksController(req: Request, res: Response) {
 	//  Fetch all cards in the deck
 	const decks = await Deck.find(); // Fetches all the decks in Database
-	//    console.log(decks); // prints all cards in a deck
+	//    console.log(decks); // prints all decks in a db
 	res.json(decks);
 }
 
@@ -21,4 +21,12 @@ export async function deleteDeckController(req: Request, res: Response) {
 	const deckId = req.params.deckId;
 	const deletedDeck = await Deck.findByIdAndDelete(deckId);
 	res.json(deletedDeck);
+}
+
+export async function getDeckController(req: Request, res: Response) {
+	//  Fetch single deck
+	const { deckId } = req.params;
+	const deck = await Deck.findById(deckId); // Fetches all the decks in Database
+	//    console.log(deck); // prints Single deck
+	res.json(deck);
 }

@@ -17,6 +17,9 @@ a {
 	text-decoration: none;
 	color: var(--txt-clr-dark);
 }
+a:hover {
+	color: var(--accent-border);
+}
 
 h1 {
 	font-size: 3.2em;

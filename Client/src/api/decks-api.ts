@@ -2,9 +2,18 @@ import { API_URI } from "./config";
 
 export async function getDecksApi(): Promise<Deck[]> {
 	// Promise chaining
-	const decks = await fetch(`${API_URI}/get-decks`).then(res => res.json());
+	const decks = await fetch(`${API_URI}/decks`, { method: "GET" }).then(res =>
+		res.json(),
+	);
 
 	return decks;
+}
+export async function getDeckApi(deckId: string): Promise<Deck> {
+	const deck = await fetch(`${API_URI}/decks/${deckId}`, {
+		method: "GET",
+	}).then(res => res.json());
+
+	return deck;
 }
 
 export async function createDeckApi(title: string): Promise<Deck> {
