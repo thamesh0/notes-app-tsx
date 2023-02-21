@@ -1,7 +1,11 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import mongoose from "mongoose";
-import Deck from "./models/deck";
 import cors from "cors";
+import {
+	createDeckController,
+	deleteDeckController,
+	getDecksController,
+} from "./controllers/deckControllers";
 
 require("dotenv").config({ path: "./.env" });
 
@@ -13,7 +17,6 @@ app.use(express.json());
 const port: string = process.env.PORT || "3000";
 const uri: string = process.env.MONGO_URI || "";
 
-//
 // Connect to Database & Run the server
 const db: Promise<void> = mongoose
 	.set("strictQuery", false)
@@ -25,24 +28,8 @@ const db: Promise<void> = mongoose
 	});
 
 // Server Api Endpoints
-app.get("/get-decks", async (req: Request, res: Response) => {
-	//  Fetch all cards in the deck
-	const decks = await Deck.find(); // Fetches all the cards in a deck
-	//    console.log(decks); // prints all cards in a deck
-	res.json(decks);
-});
-
-app.post("/decks", async (req: Request, res: Response) => {
-	console.log(req.body);
-	const newDeck = new Deck({
-		title: req.body.title,
-	});
-	const createdDeck = await newDeck.save();
-	res.json(`Created deck - ${createdDeck}`);
-});
-
-app.delete("/decks/:deckId", async (req: Request, res: Response) => {
-	const deckId = req.params.deckId;
-	const deletedDeck = await Deck.findByIdAndDelete(deckId);
-	res.json(deletedDeck);
-});
+// Decks Api
+app.get("/get-decks", getDecksController);
+app.post("/decks", createDeckController);
+app.delete("/decks/:deckId", deleteDeckController);
+// Cards for Deck Api

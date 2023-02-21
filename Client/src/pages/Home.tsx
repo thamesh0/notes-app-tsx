@@ -16,30 +16,22 @@ export const Home = () => {
 
 	async function handleDeleteDeck(deckId: string) {
 		const res = await deleteDeckApi(deckId);
-
 		// To maintain Consistency, Either
 		// Refetch all data or Optimistic updates
-
-		// Optimisic Updates
+		// Optimisic Updates -
 		setDecks(decks.filter(deck => deck._id !== deckId)); // filter function returns when the condition is false
 	}
 
 	async function handleCreateDeck(e: React.FormEvent) {
-		// e.preventDefault(); // no reloading - looks cleaner
-
 		if (title && title !== "") {
 			const res = await createDeckApi(title);
-
-			// // Optimistic Updates
-			// const deck: Deck = { title: res.title, _id: res._id };
-			// console.log(deck.title);
-			// setDecks([...decks, deck]);
 
 			// Reset Title & alert
 			setTitle("");
 			setIsEmpty(false);
 		} else {
 			// Display alert
+			e.preventDefault();
 			setIsEmpty(true);
 		}
 	}
