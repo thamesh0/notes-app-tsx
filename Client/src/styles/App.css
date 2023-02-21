@@ -10,17 +10,12 @@
 	-webkit-text-size-adjust: 100%;
 }
 
-a {
-	font-weight: 500;
-	color: var(--accent-border);
-	text-decoration: inherit;
-}
-a:hover {
-	color: var(--accent);
-}
-
 body {
 	min-height: 100vh;
+}
+a {
+	text-decoration: none;
+	color: var(--txt-clr-dark);
 }
 
 h1 {
@@ -28,28 +23,25 @@ h1 {
 	line-height: 1.1;
 }
 button {
-	cursor: pointer;
 	border: none;
+	cursor: pointer;
 	border-radius: 8px;
-}
-.submit-button {
-	font-size: 1em;
-	font-weight: 500;
-	font-family: inherit;
-	padding: 0.6em 1.2em;
-	background-color: var(--btn-clr);
 }
 
 button:focus,
-button:focus-visible {
-	outline: 4px auto -webkit-focus-ring-color;
-}
-
 input {
 	background-color: var(--clr-dark);
 	color: var(--txt-clr);
 	border: 1px solid white;
 	border-radius: 4px;
+}
+
+#error-page {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	min-height: 100vh;
 }
 
 .Home {
@@ -62,6 +54,7 @@ input {
 }
 
 .create-deck-form {
+	margin: 20px;
 	display: flex;
 	gap: 10px;
 	align-items: center;
@@ -80,6 +73,14 @@ input {
 	margin: 10px;
 }
 
+.submit-button {
+	font-size: 1em;
+	font-weight: 500;
+	font-family: inherit;
+	padding: 0.6em 1.2em;
+	background-color: var(--btn-clr);
+}
+
 .decks {
 	gap: 10px;
 	display: grid;
@@ -89,12 +90,12 @@ input {
 }
 
 .decks li {
-	position: relative;
 	display: flex;
-	justify-content: center;
-	align-items: center;
 	height: 130px;
+	position: relative;
 	border-radius: 10px;
+	align-items: center;
+	justify-content: center;
 	background: var(--btn-clr);
 	color: var(--txt-clr-dark);
 }

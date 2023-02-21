@@ -1,97 +1,90 @@
 import React, { useEffect, useState } from "react";
+import { createDeckApi, deleteDeckApi, getDecksApi } from "../api/decks-api";
+import { Link } from "react-router-dom";
 
-type Deck = {
-  title: string;
-  _id: string;
-};
 export const Home = () => {
-  const [decks, setDecks] = useState<Deck[]>([]);
-  const [title, setTitle] = useState("");
-  const [isEmpty, setIsEmpty] = useState(false);
+	const [decks, setDecks] = useState<Deck[]>([]);
 
-  async function fetchDecks() {
-    // const res = await fetch("http://localhost:3000/get-decks");
-    // const newDecks = await res.json();
+	const [title, setTitle] = useState("");
 
-    // Promise chaining
-    const newDecks = await fetch("http://localhost:3000/get-decks").then(
-      (res) => res.json()
-    );
+	const [isEmpty, setIsEmpty] = useState(false);
 
-    setDecks(newDecks);
-  }
+	async function fetchDecks() {
+		const decks = await getDecksApi();
+		setDecks(decks); // Store Decks for Display
+	}
 
-  useEffect(() => {
-    fetchDecks();
-    return () => {
-      console.log("cleanup");
-    };
-  }, []);
+	async function handleDeleteDeck(deckId: string) {
+		const res = await deleteDeckApi(deckId);
 
-  async function handleCreateDeck(e: React.FormEvent) {
-    e.preventDefault();
-    if (title && title !== "") {
-      const res = await fetch("http://localhost:3000/decks", {
-        method: "POST",
-        body: JSON.stringify({
-          title,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const deck = await res.json();
-      setTitle("");
-      setIsEmpty(false);
-      setDecks([...decks, deck]);
-    } else {
-      // alert("Title shouldn't be empty")
-      setIsEmpty(true);
-    }
-  }
+		// To maintain Consistency, Either
+		// Refetch all data or Optimistic updates
 
-  async function handleDeleteDeck(deckId: string) {
-    await fetch(`http://localhost:3000/decks/${deckId}`, {
-      method: "DELETE",
-    });
+		// Optimisic Updates
+		setDecks(decks.filter(deck => deck._id !== deckId)); // filter function returns when the condition is false
+	}
 
-    // Refetch all data or Optimistic update
+	async function handleCreateDeck(e: React.FormEvent) {
+		// e.preventDefault(); // no reloading - looks cleaner
 
-    // Optimisic Updates
-    setDecks(decks.filter((deck) => deck._id !== deckId)); // filter function returns when the condition is false
-  }
+		if (title && title !== "") {
+			const res = await createDeckApi(title);
 
-  return (
-    // Flex-box centers the entire component
-    <div className="Home">
-      <h1>Flash Card Decks</h1>
-      <div className="decks">
-        {decks.map((deck) => (
-          <li key={deck._id}>
-            <button onClick={() => handleDeleteDeck(deck._id)}>X</button>
-            {deck.title}
-          </li>
-        ))}
-      </div>
+			// // Optimistic Updates
+			// const deck: Deck = { title: res.title, _id: res._id };
+			// console.log(deck.title);
+			// setDecks([...decks, deck]);
 
-      {/* separate form & alert span */}
-      <div className="form-span">
-        <form className="create-deck-form" onSubmit={handleCreateDeck}>
-          <label htmlFor="title">Deck Title</label>
-          <input
-            className="input-field"
-            type="text"
-            value={title}
-            id="title"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setTitle(e.target.value);
-            }}
-          />
-          <button className="submit-button">Create Deck</button>
-        </form>
+			// Reset Title & alert
+			setTitle("");
+			setIsEmpty(false);
+		} else {
+			// Display alert
+			setIsEmpty(true);
+		}
+	}
 
-        <span className={isEmpty ? "alert " : ""}></span>
-      </div>
-    </div>
-  );
+	useEffect(() => {
+		fetchDecks();
+
+		return () => {
+			console.log("cleanup");
+		};
+	}, []);
+
+	return (
+		// Flex-box centers the entire component
+		<div className='Home'>
+			<h1>Flash Card Decks</h1>
+			<div className='decks'>
+				{decks.map(deck => (
+					<li key={deck._id}>
+						<button onClick={() => handleDeleteDeck(deck._id)}>X</button>
+						<Link className='deck-title' to={`/decks/${deck._id}`}>
+							{deck.title}
+						</Link>
+					</li>
+				))}
+			</div>
+
+			{/* separate form & alert span */}
+			<div className='form-span'>
+				<form className='create-deck-form' onSubmit={handleCreateDeck}>
+					<label htmlFor='title'>Deck Title</label>
+					<input
+						className='input-field'
+						type='text'
+						value={title}
+						id='title'
+						onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+							setTitle(e.target.value);
+						}}
+					/>
+					<button className='submit-button'>Create Deck</button>
+				</form>
+
+				<span className={isEmpty ? "alert " : ""}></span>
+			</div>
+		</div>
+	);
 };

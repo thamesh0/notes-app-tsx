@@ -1,36 +1,28 @@
-import {
-  RouterProvider,
-  Navigate,
-  createBrowserRouter,
-} from "react-router-dom";
-import { Home } from "./pages/Home";
-import { useState } from "react";
-import "./styles/App.css";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Deck } from "./components/Deck";
+import { Home } from "./pages/Home";
+import "./styles/App.css";
+import { ErrorPage } from "./pages/Error";
 
 function App() {
-  const [count, setCount] = useState(0);
+	const router = createBrowserRouter([
+		{
+			path: "/",
+			element: <Home />,
+			errorElement: <ErrorPage />,
+		},
+		{
+			path: "/decks/:deckId",
+			element: <Deck />,
+			errorElement: <ErrorPage />,
+		},
+	]);
 
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Home />,
-    },
-    {
-      path: "/decks",
-      element: <Home />,
-    },
-    {
-      path: "/decks/:deckId",
-      element: <Deck />,
-    },
-  ]);
-
-  return (
-    <div className="App">
-      <RouterProvider router={router} />
-    </div>
-  );
+	return (
+		<div className='App'>
+			<RouterProvider router={router} />
+		</div>
+	);
 }
 
 export default App;
