@@ -16,8 +16,6 @@ export const Home = () => {
 
 	async function handleDeleteDeck(deckId: string) {
 		const res = await deleteDeckApi(deckId);
-		// To maintain Consistency, Either
-		// Refetch all data or Optimistic updates
 		// Optimisic Updates -
 		setDecks(decks.filter(deck => deck._id !== deckId)); // filter function returns when the condition is false
 	}

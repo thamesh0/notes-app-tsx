@@ -22,11 +22,3 @@ export async function deleteDeckController(req: Request, res: Response) {
 	const deletedDeck = await Deck.findByIdAndDelete(deckId);
 	res.json(deletedDeck);
 }
-
-export async function getDeckController(req: Request, res: Response) {
-	//  Fetch single deck
-	const { deckId } = req.params;
-	const deck = await Deck.findById(deckId); // Fetches all the decks in Database
-	//    console.log(deck); // prints Single deck
-	res.json(deck);
-}
