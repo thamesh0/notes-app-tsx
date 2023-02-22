@@ -1,15 +1,6 @@
 import express from "express";
 import { Router } from "./routes/routes";
 import cors from "cors";
-import {
-	createDeckController,
-	deleteDeckController,
-	getDecksController,
-} from "./controllers/deckControllers";
-import {
-	createCardForDeckController,
-	getCardsForDeckController,
-} from "./controllers/cardControllers";
 import { connecToDatabase } from "./db/conn";
 
 require("dotenv").config({ path: "./.env" });
