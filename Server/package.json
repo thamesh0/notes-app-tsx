@@ -4,8 +4,8 @@
 	"description": "",
 	"main": "index.ts",
 	"nodemonConfig": {
-		"crash": "kill-port 3000",
-		"restart": "kill-port 3000",
+		"crash": "kill-port 5000",
+		"restart": "kill-port 5000",
 		"watch": [
 			"src/**"
 		],
@@ -18,7 +18,7 @@
 	},
 	"scripts": {
 		"dev": "nodemon",
-		"build": "npm run build",
+		"build": "react-scripts build",
 		"start": "node build/index.ts",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
@@ -26,7 +26,8 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"mongodb": "^4.13.0"
+		"mongodb": "^4.13.0",
+		"react-scripts": "^5.0.1"
 	},
 	"devDependencies": {
 		"@types/cors": "^2.8.13",
