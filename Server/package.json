@@ -18,7 +18,7 @@
 	},
 	"scripts": {
 		"dev": "nodemon",
-		"build": "react-scripts build",
+		"build": "CI=false react-scripts build",
 		"start": "node build/index.ts",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
