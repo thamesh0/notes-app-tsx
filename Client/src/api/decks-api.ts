@@ -2,8 +2,8 @@ import { API_URI } from "./config";
 
 export async function getDecksApi(): Promise<Deck[]> {
 	// Promise chaining
-	const decks = await fetch(`${API_URI}/decks`, { method: "GET" }).then(res =>
-		res.json(),
+	const decks = await fetch(`${API_URI}/decks`, { method: "GET" }).then((res) =>
+		res.json()
 	);
 
 	return decks;
@@ -11,7 +11,7 @@ export async function getDecksApi(): Promise<Deck[]> {
 export async function getDeckApi(deckId: string): Promise<Deck> {
 	const deck = await fetch(`${API_URI}/decks/${deckId}`, {
 		method: "GET",
-	}).then(res => res.json());
+	}).then((res) => res.json());
 
 	return deck;
 }
@@ -25,7 +25,7 @@ export async function createDeckApi(title: string): Promise<Deck> {
 		headers: {
 			"Content-Type": "application/json",
 		},
-	}).then(res => res.json());
+	}).then((res) => res.json());
 
 	return createdDeck;
 }
@@ -33,7 +33,7 @@ export async function createDeckApi(title: string): Promise<Deck> {
 export async function deleteDeckApi(deckId: string): Promise<Deck> {
 	const deletedDeck = await fetch(`${API_URI}/decks/${deckId}`, {
 		method: "DELETE",
-	}).then(res => res.json());
+	}).then((res) => res.json());
 
 	return deletedDeck;
 }
