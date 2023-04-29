@@ -7,7 +7,12 @@ require("dotenv").config({ path: "./.env" });
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+	cors({
+		origin: "https://https://notes-app-tsx.vercel.app",
+		credentials: true,
+	})
+);
 app.use(Router);
 const port: string = process.env.PORT || "3000";
 
