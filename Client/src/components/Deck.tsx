@@ -24,6 +24,8 @@ export const Deck = () => {
 	}
 
 	async function handleCreateCard(e: React.FormEvent) {
+		e.preventDefault();
+
 		if (cardText && cardText !== "") {
 			const res = await createCardApi(cardText, deckId!);
 
@@ -32,7 +34,6 @@ export const Deck = () => {
 			setIsEmpty(false);
 		} else {
 			// Display alert
-			e.preventDefault();
 			setIsEmpty(true);
 		}
 	}
