@@ -22,6 +22,7 @@ export const Home = () => {
 	}
 
 	async function handleCreateDeck(e: React.FormEvent) {
+		e.preventDefault();
 		if (title && title !== "") {
 			const res = await createDeckApi(title);
 
@@ -30,7 +31,6 @@ export const Home = () => {
 			setIsEmpty(false);
 		} else {
 			// Display alert
-			e.preventDefault();
 			setIsEmpty(true);
 		}
 	}
