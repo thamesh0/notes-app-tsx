@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createDeckApi, deleteDeckApi, getDecksApi } from "../api/decks-api";
 import { Link } from "react-router-dom";
+import { Deck } from "../types/types";
 
 export const Home = () => {
 	const [decks, setDecks] = useState<Deck[]>([]);
@@ -17,7 +18,7 @@ export const Home = () => {
 	async function handleDeleteDeck(deckId: string) {
 		const res = await deleteDeckApi(deckId);
 		// Optimisic Updates -
-		setDecks(decks.filter(deck => deck._id !== deckId)); // filter function returns when the condition is false
+		setDecks(decks.filter((deck) => deck._id !== deckId)); // filter function returns when the condition is false
 	}
 
 	async function handleCreateDeck(e: React.FormEvent) {
@@ -44,13 +45,13 @@ export const Home = () => {
 
 	return (
 		// Flex-box centers the entire component
-		<div className='Home'>
+		<div className="Home">
 			<h1>Flash Card Decks</h1>
-			<div className='decks'>
-				{decks.map(deck => (
+			<div className="decks">
+				{decks.map((deck) => (
 					<li key={deck._id}>
 						<button onClick={() => handleDeleteDeck(deck._id)}>X</button>
-						<Link className='deck-title' to={`/decks/${deck._id}`}>
+						<Link className="deck-title" to={`/decks/${deck._id}`}>
 							{deck.title}
 						</Link>
 					</li>
@@ -58,19 +59,19 @@ export const Home = () => {
 			</div>
 
 			{/* separate form & alert span */}
-			<div className='form-span'>
-				<form className='create-deck-form' onSubmit={handleCreateDeck}>
-					<label htmlFor='title'>Deck Title</label>
+			<div className="form-span">
+				<form className="create-deck-form" onSubmit={handleCreateDeck}>
+					<label htmlFor="title">Deck Title</label>
 					<input
-						className='input-field'
-						type='text'
+						className="input-field"
+						type="text"
 						value={title}
-						id='title'
+						id="title"
 						onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
 							setTitle(e.target.value);
 						}}
 					/>
-					<button className='submit-button'>Create Deck</button>
+					<button className="submit-button">Create Deck</button>
 				</form>
 
 				<span className={isEmpty ? "alert " : ""}></span>

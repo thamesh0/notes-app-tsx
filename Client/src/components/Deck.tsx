@@ -47,9 +47,9 @@ export const Deck = () => {
 
 	return (
 		// Flex-box centers the entire component
-		<div className='Home'>
+		<div className="Home">
 			<h1>Cards</h1>
-			<div className='decks'>
+			<div className="decks">
 				{cards.map((card, i) => (
 					<li key={i}>
 						<button onClick={() => handleDeleteCard(deckId!)}>X</button>
@@ -59,19 +59,19 @@ export const Deck = () => {
 			</div>
 
 			{/* separate form & alert span */}
-			<div className='form-span'>
-				<form className='create-deck-form' onSubmit={handleCreateCard}>
-					<label htmlFor='title'>Deck Title</label>
+			<div className="form-span">
+				<form className="create-deck-form" onSubmit={handleCreateCard}>
+					<label htmlFor="title">Deck Title</label>
 					<input
-						className='input-field'
-						type='text'
+						className="input-field"
+						type="text"
 						value={cardText}
-						id='title'
+						id="title"
 						onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
 							setCardText(e.target.value);
 						}}
 					/>
-					<button className='submit-button'>Add Card</button>
+					<button className="submit-button">Add Card</button>
 				</form>
 
 				<span className={isEmpty ? "alert " : ""}></span>
