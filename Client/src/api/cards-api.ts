@@ -1,17 +1,18 @@
+import { Deck } from "../types/types";
 import { API_URI } from "./config";
 
 export async function getCardsApi(deckId: string): Promise<String[]> {
 	// Promise chaining
 	const cards = await fetch(`${API_URI}/decks/${deckId}`, {
 		method: "GET",
-	}).then(res => res.json());
+	}).then((res) => res.json());
 
 	return cards;
 }
 
 export async function createCardApi(
 	cardText: string,
-	deckId: string,
+	deckId: string
 ): Promise<String[]> {
 	const createdCard = await fetch(`${API_URI}/decks/${deckId}`, {
 		method: "POST",
@@ -21,7 +22,7 @@ export async function createCardApi(
 		headers: {
 			"Content-Type": "application/json",
 		},
-	}).then(res => res.json());
+	}).then((res) => res.json());
 
 	return createdCard;
 }
@@ -29,7 +30,7 @@ export async function createCardApi(
 export async function deleteCardApi(deckId: string): Promise<Deck> {
 	const deletedCard = await fetch(`${API_URI}/decks/${deckId}`, {
 		method: "DELETE",
-	}).then(res => res.json());
+	}).then((res) => res.json());
 
 	return deletedCard;
 }

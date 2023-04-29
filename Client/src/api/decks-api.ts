@@ -1,5 +1,5 @@
 import { API_URI } from "./config";
-
+import { Deck } from "../types/types";
 export async function getDecksApi(): Promise<Deck[]> {
 	// Promise chaining
 	const decks = await fetch(`${API_URI}/decks`, { method: "GET" }).then((res) =>
