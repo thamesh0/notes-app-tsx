@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(
 	cors({
-		origin: "https://https://notes-app-tsx.vercel.app",
+		origin: "https://notes-app-tsx.vercel.app",
 		credentials: true,
 	})
 );
