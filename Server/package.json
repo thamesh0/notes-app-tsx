@@ -18,8 +18,7 @@
 	},
 	"scripts": {
 		"dev": "nodemon",
-		"build": "CI=false react-scripts build",
-		"start": "node build/index.ts",
+		"start": "node src/index.ts",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
