@@ -14,7 +14,7 @@ const port: string = process.env.PORT || "3000";
 // Run the server
 app.listen(port, async () => {
 	// perform Database connection when the server starts
-	await connecToDatabase();
+	await connecToDatabase(); // Run model
 	console.log(`listening to port ${port}`);
 });
 
