@@ -1,2 +1,1 @@
-const port = 5000;
-export const API_URI = `http://localhost:${port}`;
+export const API_URI = `https://notes-app-tsx.up.railway.app`;
