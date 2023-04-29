@@ -18,7 +18,8 @@
 	},
 	"scripts": {
 		"dev": "nodemon",
-		"build": "node build/index.ts",
+		"build": "npm install && npm run build",
+		"start": "node build/index.ts",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
