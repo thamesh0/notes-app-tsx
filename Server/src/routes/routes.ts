@@ -22,8 +22,8 @@ router.get("/", (req, res) => {
 router.post("/decks", createDeckController); // Create new Deck
 router.get("/decks", getDecksController); // Get all decks in the Db
 router.get("/decks/:deckId", getDeckByIdController); // Get all decks in the Db
-router.delete("/decks/:deckId", deleteDeckController); // delete Deck
+router.delete("/decks/:deckId/cards/:index", deleteDeckController); // delete Deck
 
 // Cards for Deck Api
-router.post("/decks/:deckId", createCardForDeckController); // Create card for a deck
+router.post("/decks/:deckId/cards", createCardForDeckController); // Create card for a deck
 router.delete("/decks/:deckId", deleteCardFromDeckController); // Delete card from deck

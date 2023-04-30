@@ -7,7 +7,7 @@ export async function createCardApi(
 	deckId: string
 ): Promise<String[]> {
 	console.log(cardText);
-	const cardsInDeck = await fetch(`${API_URI}/decks/${deckId}`, {
+	const cardsInDeck = await fetch(`${API_URI}/decks/${deckId}/cards`, {
 		method: "POST",
 		body: JSON.stringify({
 			cardText,
@@ -22,9 +22,9 @@ export async function createCardApi(
 
 export async function deleteCardApi(
 	deckId: string,
-	title: string
+	index: number
 ): Promise<Deck> {
-	const deletedCard = await fetch(`${API_URI}/decks/${deckId}`, {
+	const deletedCard = await fetch(`${API_URI}/decks/${deckId}/cards/${index}`, {
 		method: "DELETE",
 	}).then((res) => res.json());
 
