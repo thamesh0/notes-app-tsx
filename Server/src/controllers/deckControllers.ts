@@ -14,7 +14,7 @@ export async function createDeckController(req: Request, res: Response) {
 		title: req.body.title,
 	});
 	const createdDeck = await newDeck.save();
-	res.json(`Created deck - ${createdDeck}`);
+	res.json(createdDeck);
 }
 
 export async function deleteDeckController(req: Request, res: Response) {

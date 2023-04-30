@@ -18,30 +18,28 @@ export const Home = () => {
 
 	async function handleDeleteDeck(deckId: string) {
 		const res = await deleteDeckApi(deckId);
-		// Optimisic Updates -
+		console.log(res);
+		// Optimisic Update
 		setDecks(decks.filter((deck) => deck._id !== deckId)); // filter function returns when the condition is false
 	}
 
 	async function handleCreateDeck(e: React.FormEvent) {
 		e.preventDefault();
 		if (title && title != "") {
-			console.log("creating new deck...");
-			const res = await createDeckApi(title);
-
+			const newDeck = await createDeckApi(title);
+			console.log(newDeck);
+			// Optimistic Updates
+			// setDecks([...decks, newDeck]);
 			// Reset Title & alert
 			setTitle("");
-			console.log("dont print this");
 		} else {
 			// Display alert
-			// e.preventDefault();
 			setError(true);
 		}
 	}
 
 	useEffect(() => {
-		(async function getMyDecks() {
-			await fetchDecks();
-		})();
+		fetchDecks();
 
 		return () => {
 			console.log(decks);

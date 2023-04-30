@@ -1,5 +1,5 @@
 export type Deck = {
 	title: string;
-	cards: [string];
+	cards: string[];
 	_id: string;
 };

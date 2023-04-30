@@ -1,24 +1,13 @@
 import { API_URI } from "./config";
 import { Deck } from "../types/types";
 export async function getDecksApi(): Promise<Deck[]> {
-	// Promise chaining
-	const decks = await fetch(`${API_URI}/decks`, { method: "GET" }).then((res) =>
-		res.json()
-	);
+	const response = await fetch(`${API_URI}/decks`, { method: "GET" });
 
-	return decks;
-}
-export async function getDeckApi(deckId: string): Promise<Deck> {
-	const deck = await fetch(`${API_URI}/decks/${deckId}`, {
-		method: "GET",
-	}).then((res) => res.json());
-
-	return deck;
+	return response.json();
 }
 
 export async function createDeckApi(title: string): Promise<Deck> {
-	console.log(title);
-	const createdDeck = await fetch(`${API_URI}/decks`, {
+	const response = await fetch(`${API_URI}/decks`, {
 		method: "POST",
 		body: JSON.stringify({
 			title,
@@ -26,15 +15,15 @@ export async function createDeckApi(title: string): Promise<Deck> {
 		headers: {
 			"Content-Type": "application/json",
 		},
-	}).then((res) => res.json());
+	});
 
-	return createdDeck;
+	return response.json();
 }
 
 export async function deleteDeckApi(deckId: string): Promise<Deck> {
-	const deletedDeck = await fetch(`${API_URI}/decks/${deckId}`, {
+	const response = await fetch(`${API_URI}/decks/${deckId}`, {
 		method: "DELETE",
-	}).then((res) => res.json());
+	});
 
-	return deletedDeck;
+	return response.json();
 }
