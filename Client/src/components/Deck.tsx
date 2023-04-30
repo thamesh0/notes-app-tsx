@@ -24,6 +24,7 @@ export const Deck = () => {
 	}
 
 	async function handleCreateCard(e: React.FormEvent) {
+		e.preventDefault();
 		if (cardText && cardText !== "") {
 			const res = await createCardApi(cardText, deckId!);
 
@@ -32,7 +33,6 @@ export const Deck = () => {
 		} else {
 			// Display alert
 
-			e.preventDefault();
 			setError(true);
 		}
 	}
@@ -43,7 +43,7 @@ export const Deck = () => {
 		return () => {
 			console.log("cleanup");
 		};
-	}, []);
+	}, [handleCreateCard]);
 
 	return (
 		// Flex-box centers the entire component
