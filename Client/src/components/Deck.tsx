@@ -23,7 +23,7 @@ export const Deck = () => {
 		// setCards(cards.filter(card => card._id !== deckId)); // filter function returns when the condition is false
 	}
 
-	async function handleCreateCard(e: React.FormEvent) {
+	async function handleCreateCard(e: React.ChangeEvent) {
 		e.preventDefault();
 		if (cardText && cardText !== "") {
 			const res = await createCardApi(cardText, deckId!);
@@ -60,7 +60,7 @@ export const Deck = () => {
 
 			{/* separate form & alert span */}
 			<div className="form-span">
-				<form className="create-deck-form" onSubmit={handleCreateCard}>
+				<form className="create-deck-form">
 					<label htmlFor="title">Deck Title</label>
 					<input
 						className="input-field"
@@ -71,7 +71,9 @@ export const Deck = () => {
 							setCardText(e.target.value);
 						}}
 					/>
-					<button className="submit-button">Add Card</button>
+					<button className="submit-button" onClick={() => handleCreateCard}>
+						Add Card
+					</button>
 				</form>
 
 				<span className={error ? "alert " : ""}></span>
