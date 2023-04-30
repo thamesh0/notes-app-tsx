@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Deck } from "./components/Deck";
-import { Home } from "./pages/Home";
+import { Cards } from "./pages/Cards";
+import { Decks } from "./pages/Decks";
 import "./styles/App.css";
 import { ErrorPage } from "./pages/Error";
 
@@ -8,12 +8,12 @@ function App() {
 	const router = createBrowserRouter([
 		{
 			path: "/",
-			element: <Home />,
+			element: <Decks />,
 			errorElement: <ErrorPage />,
 		},
 		{
 			path: "/decks/:deckId",
-			element: <Deck />,
+			element: <Cards />,
 			errorElement: <ErrorPage />,
 		},
 	]);

@@ -1,8 +1,13 @@
 import { API_URI } from "./config";
 import { Deck } from "../types/types";
+
 export async function getDecksApi(): Promise<Deck[]> {
 	const response = await fetch(`${API_URI}/decks`, { method: "GET" });
 
+	return response.json();
+}
+export async function getDeckByIdApi(deckId: string): Promise<Deck> {
+	const response = await fetch(`${API_URI}/decks/${deckId}`, { method: "GET" });
 	return response.json();
 }
 

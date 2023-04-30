@@ -1,5 +1,5 @@
 import express from "express";
-import { Router } from "./routes/routes";
+import { router } from "./routes/routes";
 import cors from "cors";
 import { connecToDatabase } from "./db/conn";
 
@@ -13,7 +13,7 @@ app.use(
 		credentials: true,
 	})
 );
-app.use(Router);
+app.use(router);
 const port: string = process.env.PORT || "3000";
 
 // Run the server

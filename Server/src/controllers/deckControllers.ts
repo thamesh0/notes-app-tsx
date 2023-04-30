@@ -7,6 +7,17 @@ export async function getDecksController(req: Request, res: Response) {
 	//    console.log(decks); // prints all decks in a db
 	res.json(decks);
 }
+export async function getDeckByIdController(req: Request, res: Response) {
+	//  Fetch all cards in the deck
+	const deckId = req.params.deckId;
+	const deck = await Deck.findById(deckId); // Fetches all the decks in Database
+
+	if (!deck) {
+		return res.status(400).send("Deck id Doesn't exist.");
+	}
+	console.log(deck);
+	res.json(deck); // Returns the information of a Single Deck
+}
 
 export async function createDeckController(req: Request, res: Response) {
 	const newDeck = new Deck({

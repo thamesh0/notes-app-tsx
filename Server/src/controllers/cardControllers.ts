@@ -16,18 +16,6 @@ export async function createCardForDeckController(req: Request, res: Response) {
 	}
 }
 
-export async function getCardsForDeckController(req: Request, res: Response) {
-	//  Fetch all cards in the deck
-	const deckId = req.params.deckId;
-	const deck = await Deck.findById(deckId); // Fetches all the decks in Database
-
-	if (!deck) {
-		return res.status(400).send("Deck id Doesn't exist.");
-	}
-	console.log(deck); // prints all cards in the deck
-	res.json(deck.cards);
-}
-
 export async function deleteCardFromDeckController(
 	req: Request,
 	res: Response

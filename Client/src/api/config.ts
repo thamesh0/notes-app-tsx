@@ -1,1 +1,1 @@
-export const API_URI = `https://notes-app-tsx.up.railway.app`;
+export const API_URI = import.meta.env.VITE_API_URL || "http://localhost:5000";

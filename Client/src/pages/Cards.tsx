@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { createCardApi } from "../api/cards-api";
-import { getCardsApi } from "../api/cards-api";
+import { getDeckByIdApi } from "../api/decks-api";
 
-export const Deck = () => {
+export const Cards = () => {
 	const [cards, setCards] = useState<String[]>([]);
 
 	const [cardText, setCardText] = useState("");
@@ -13,8 +13,8 @@ export const Deck = () => {
 	const { deckId } = useParams();
 
 	async function fetchCards() {
-		const res = await getCardsApi(deckId!);
-		setCards(res);
+		const res = await getDeckByIdApi(deckId!);
+		setCards(res.cards);
 	}
 
 	async function handleDeleteCard(cardText: string) {

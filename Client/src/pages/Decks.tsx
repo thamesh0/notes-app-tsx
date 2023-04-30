@@ -3,7 +3,7 @@ import { createDeckApi, deleteDeckApi, getDecksApi } from "../api/decks-api";
 import { Link } from "react-router-dom";
 import { Deck } from "../types/types";
 
-export const Home = () => {
+export const Decks = () => {
 	const [decks, setDecks] = useState<Deck[]>([]);
 
 	const [title, setTitle] = useState("");
