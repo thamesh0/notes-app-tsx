@@ -23,8 +23,5 @@ app.listen(port, async () => {
 	console.log(`listening to port ${port}`);
 });
 
-app.get("/", (req, res) => {
-	res.send("Notes App Server");
-});
 // Server Api Endpoints
 // Decks Api
