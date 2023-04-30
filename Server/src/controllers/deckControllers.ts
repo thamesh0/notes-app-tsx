@@ -9,7 +9,6 @@ export async function getDecksController(req: Request, res: Response) {
 }
 
 export async function createDeckController(req: Request, res: Response) {
-	console.log(req.body);
 	const newDeck = new Deck({
 		title: req.body.title,
 	});

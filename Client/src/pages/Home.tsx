@@ -28,8 +28,9 @@ export const Home = () => {
 		if (title && title != "") {
 			const newDeck = await createDeckApi(title);
 			console.log(newDeck);
+
 			// Optimistic Updates
-			// setDecks([...decks, newDeck]);
+			setDecks([...decks, newDeck]);
 			// Reset Title & alert
 			setTitle("");
 		} else {

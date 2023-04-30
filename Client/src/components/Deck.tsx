@@ -24,15 +24,15 @@ export const Deck = () => {
 	}
 
 	async function handleCreateCard(e: React.FormEvent) {
+		e.preventDefault();
 		if (cardText && cardText != "") {
-			// e.preventDefault();
-			const res = await createCardApi(cardText, deckId!);
-
+			const newCard = await createCardApi(cardText, deckId!);
+			console.log(newCard);
+			setCards([...cards, newCard]);
 			// Reset Input field & alert
 			setCardText("");
 		} else {
 			// Display alert
-			e.preventDefault();
 
 			setError(true);
 		}
