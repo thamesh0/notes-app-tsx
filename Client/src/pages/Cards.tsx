@@ -13,8 +13,9 @@ export const Cards = () => {
 	const { deckId } = useParams();
 
 	async function fetchCards() {
-		const res = await getDeckByIdApi(deckId!);
-		setCards(res.cards);
+		if (!deckId) return;
+		const currDeck = await getDeckByIdApi(deckId!);
+		setCards(currDeck.cards);
 	}
 
 	async function handleDeleteCard(cardText: string) {
@@ -26,9 +27,9 @@ export const Cards = () => {
 	async function handleCreateCard(e: React.FormEvent) {
 		e.preventDefault();
 		if (cardText && cardText != "") {
-			const newCard = await createCardApi(cardText, deckId!);
-			console.log(newCard);
-			setCards([...cards, newCard]);
+			const fetchedCards = await createCardApi(cardText, deckId!);
+			console.log(fetchedCards);
+			setCards(fetchedCards);
 			// Reset Input field & alert
 			setCardText("");
 		} else {
@@ -39,14 +40,12 @@ export const Cards = () => {
 	}
 
 	useEffect(() => {
-		(async function getMyDecks() {
-			await fetchCards();
-		})();
+		fetchCards();
 
 		return () => {
 			console.log(cards);
 		};
-	}, []);
+	}, [deckId]);
 
 	return (
 		// Flex-box centers the entire component

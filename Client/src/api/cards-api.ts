@@ -1,12 +1,13 @@
 import { Deck } from "../types/types";
 import { API_URI } from "./config";
 
+// Appends the newCard at the end of cards array and returns cards array from the deck
 export async function createCardApi(
 	cardText: string,
 	deckId: string
-): Promise<String> {
+): Promise<String[]> {
 	console.log(cardText);
-	const createdCard = await fetch(`${API_URI}/decks/${deckId}`, {
+	const cardsInDeck = await fetch(`${API_URI}/decks/${deckId}`, {
 		method: "POST",
 		body: JSON.stringify({
 			cardText,
@@ -16,7 +17,7 @@ export async function createCardApi(
 		},
 	}).then((res) => res.json());
 
-	return createdCard;
+	return cardsInDeck;
 }
 
 export async function deleteCardApi(
