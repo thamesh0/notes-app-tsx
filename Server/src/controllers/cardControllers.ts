@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Deck from "../models/deck";
 
 export async function createCardForDeckController(req: Request, res: Response) {
+	console.log(req.body.cardText);
 	const deckId = req.params.deckId;
 	const deck = await Deck.findById(deckId); // Find the deck by deckId
 	if (!deck) {
@@ -28,7 +29,7 @@ export async function getCardsForDeckController(req: Request, res: Response) {
 
 export async function deleteCardFromDeckController(
 	req: Request,
-	res: Response,
+	res: Response
 ) {
 	const deckId = req.params.deckId;
 	const deletedDeck = await Deck.findByIdAndDelete(deckId);

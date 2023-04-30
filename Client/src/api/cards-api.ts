@@ -14,6 +14,7 @@ export async function createCardApi(
 	cardText: string,
 	deckId: string
 ): Promise<String[]> {
+	console.log(cardText);
 	const createdCard = await fetch(`${API_URI}/decks/${deckId}`, {
 		method: "POST",
 		body: JSON.stringify({

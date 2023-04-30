@@ -21,8 +21,7 @@ export const Home = () => {
 		setDecks(decks.filter((deck) => deck._id !== deckId)); // filter function returns when the condition is false
 	}
 
-	async function handleCreateDeck(e: React.ChangeEvent) {
-		e.preventDefault();
+	async function handleCreateDeck(e: React.FormEvent) {
 		if (title && title != "") {
 			console.log("creating new deck...");
 			const res = await createDeckApi(title);
@@ -32,6 +31,7 @@ export const Home = () => {
 			console.log("dont print this");
 		} else {
 			// Display alert
+			e.preventDefault();
 			setError(true);
 		}
 	}
@@ -42,7 +42,7 @@ export const Home = () => {
 		return () => {
 			console.log(decks);
 		};
-	}, [handleCreateDeck]);
+	}, []);
 
 	return (
 		// Flex-box centers the entire component
@@ -61,7 +61,7 @@ export const Home = () => {
 
 			{/* separate form & alert span */}
 			<div className="form-span">
-				<form className="create-deck-form">
+				<form className="create-deck-form" onSubmit={handleCreateDeck}>
 					<label htmlFor="title">Deck Title</label>
 					<input
 						className="input-field"
@@ -72,9 +72,7 @@ export const Home = () => {
 							setTitle(e.target.value);
 						}}
 					/>
-					<button className="submit-button" onClick={() => handleCreateDeck}>
-						Create Deck
-					</button>
+					<button className="submit-button">Create Deck</button>
 				</form>
 
 				<span className={error ? "alert " : ""}></span>

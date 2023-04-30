@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { createCardApi } from "../api/cards-api";
 import { getCardsApi } from "../api/cards-api";
 
@@ -23,15 +23,16 @@ export const Deck = () => {
 		// setCards(cards.filter(card => card._id !== deckId)); // filter function returns when the condition is false
 	}
 
-	async function handleCreateCard(e: React.ChangeEvent) {
-		e.preventDefault();
-		if (cardText && cardText !== "") {
+	async function handleCreateCard(e: React.FormEvent) {
+		if (cardText && cardText != "") {
+			// e.preventDefault();
 			const res = await createCardApi(cardText, deckId!);
 
 			// Reset Input field & alert
 			setCardText("");
 		} else {
 			// Display alert
+			e.preventDefault();
 
 			setError(true);
 		}
@@ -41,9 +42,9 @@ export const Deck = () => {
 		fetchCards();
 
 		return () => {
-			console.log("cleanup");
+			console.log(cards);
 		};
-	}, [handleCreateCard]);
+	}, []);
 
 	return (
 		// Flex-box centers the entire component
@@ -60,7 +61,7 @@ export const Deck = () => {
 
 			{/* separate form & alert span */}
 			<div className="form-span">
-				<form className="create-deck-form">
+				<form className="create-deck-form" onSubmit={handleCreateCard}>
 					<label htmlFor="title">Deck Title</label>
 					<input
 						className="input-field"
@@ -71,9 +72,7 @@ export const Deck = () => {
 							setCardText(e.target.value);
 						}}
 					/>
-					<button className="submit-button" onClick={() => handleCreateCard}>
-						Add Card
-					</button>
+					<button className="submit-button">Add Card</button>
 				</form>
 
 				<span className={error ? "alert " : ""}></span>
