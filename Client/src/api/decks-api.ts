@@ -17,6 +17,7 @@ export async function getDeckApi(deckId: string): Promise<Deck> {
 }
 
 export async function createDeckApi(title: string): Promise<Deck> {
+	console.log(title);
 	const createdDeck = await fetch(`${API_URI}/decks`, {
 		method: "POST",
 		body: JSON.stringify({

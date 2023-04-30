@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ReactHTML, useEffect, useState } from "react";
 import { createDeckApi, deleteDeckApi, getDecksApi } from "../api/decks-api";
 import { Link } from "react-router-dom";
 import { Deck } from "../types/types";
@@ -8,7 +8,7 @@ export const Home = () => {
 
 	const [title, setTitle] = useState("");
 
-	const [isEmpty, setIsEmpty] = useState(false);
+	const [error, setError] = useState(false);
 
 	async function fetchDecks() {
 		const decks = await getDecksApi();
@@ -21,17 +21,18 @@ export const Home = () => {
 		setDecks(decks.filter((deck) => deck._id !== deckId)); // filter function returns when the condition is false
 	}
 
-	async function handleCreateDeck(e: React.FormEvent) {
+	async function handleCreateDeck(e: React.ChangeEvent) {
 		e.preventDefault();
-		if (title && title !== "") {
+		if (title && title != "") {
+			console.log("creating new deck...");
 			const res = await createDeckApi(title);
 
 			// Reset Title & alert
 			setTitle("");
-			setIsEmpty(false);
+			console.log("dont print this");
 		} else {
 			// Display alert
-			setIsEmpty(true);
+			setError(true);
 		}
 	}
 
@@ -39,9 +40,9 @@ export const Home = () => {
 		fetchDecks();
 
 		return () => {
-			console.log("cleanup");
+			console.log(decks);
 		};
-	}, []);
+	}, [handleCreateDeck]);
 
 	return (
 		// Flex-box centers the entire component
@@ -60,7 +61,7 @@ export const Home = () => {
 
 			{/* separate form & alert span */}
 			<div className="form-span">
-				<form className="create-deck-form" onSubmit={handleCreateDeck}>
+				<form className="create-deck-form">
 					<label htmlFor="title">Deck Title</label>
 					<input
 						className="input-field"
@@ -71,10 +72,12 @@ export const Home = () => {
 							setTitle(e.target.value);
 						}}
 					/>
-					<button className="submit-button">Create Deck</button>
+					<button className="submit-button" onClick={() => handleCreateDeck}>
+						Create Deck
+					</button>
 				</form>
 
-				<span className={isEmpty ? "alert " : ""}></span>
+				<span className={error ? "alert " : ""}></span>
 			</div>
 		</div>
 	);

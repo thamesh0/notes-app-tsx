@@ -8,7 +8,7 @@ export const Deck = () => {
 
 	const [cardText, setCardText] = useState("");
 
-	const [isEmpty, setIsEmpty] = useState(false);
+	const [error, setError] = useState(false);
 
 	const { deckId } = useParams();
 
@@ -24,17 +24,16 @@ export const Deck = () => {
 	}
 
 	async function handleCreateCard(e: React.FormEvent) {
-		e.preventDefault();
-
 		if (cardText && cardText !== "") {
 			const res = await createCardApi(cardText, deckId!);
 
 			// Reset Input field & alert
 			setCardText("");
-			setIsEmpty(false);
 		} else {
 			// Display alert
-			setIsEmpty(true);
+
+			e.preventDefault();
+			setError(true);
 		}
 	}
 
@@ -75,7 +74,7 @@ export const Deck = () => {
 					<button className="submit-button">Add Card</button>
 				</form>
 
-				<span className={isEmpty ? "alert " : ""}></span>
+				<span className={error ? "alert " : ""}></span>
 			</div>
 		</div>
 	);
