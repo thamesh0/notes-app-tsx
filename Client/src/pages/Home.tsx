@@ -13,6 +13,7 @@ export const Home = () => {
 	async function fetchDecks() {
 		const decks = await getDecksApi();
 		setDecks(decks); // Store Decks for Display
+		console.log(decks);
 	}
 
 	async function handleDeleteDeck(deckId: string) {
@@ -22,6 +23,7 @@ export const Home = () => {
 	}
 
 	async function handleCreateDeck(e: React.FormEvent) {
+		e.preventDefault();
 		if (title && title != "") {
 			console.log("creating new deck...");
 			const res = await createDeckApi(title);
@@ -31,13 +33,15 @@ export const Home = () => {
 			console.log("dont print this");
 		} else {
 			// Display alert
-			e.preventDefault();
+			// e.preventDefault();
 			setError(true);
 		}
 	}
 
 	useEffect(() => {
-		fetchDecks();
+		(async function getMyDecks() {
+			await fetchDecks();
+		})();
 
 		return () => {
 			console.log(decks);

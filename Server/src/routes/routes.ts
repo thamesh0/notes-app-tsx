@@ -13,6 +13,11 @@ import {
 import express from "express";
 export const Router = express.Router();
 
+// Api Root
+Router.get("/", (req, res) => {
+	res.send("Notes App Server");
+});
+
 // fetch all decks & create Deck
 Router.post("/decks", createDeckController); // Create new Deck
 Router.get("/decks", getDecksController); // Get all decks in the Db

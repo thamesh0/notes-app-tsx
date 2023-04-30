@@ -39,7 +39,9 @@ export const Deck = () => {
 	}
 
 	useEffect(() => {
-		fetchCards();
+		(async function getMyDecks() {
+			await fetchCards();
+		})();
 
 		return () => {
 			console.log(cards);
