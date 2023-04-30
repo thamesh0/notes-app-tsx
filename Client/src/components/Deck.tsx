@@ -17,10 +17,10 @@ export const Deck = () => {
 		setCards(res);
 	}
 
-	async function handleDeleteCard(deckId: string) {
+	async function handleDeleteCard(cardText: string) {
 		// const res = await deleteDeckApi(deckId);
 		// Optimisic Updates -
-		// setCards(cards.filter(card => card._id !== deckId)); // filter function returns when the condition is false
+		setCards(cards.filter((card) => card)); // filter function returns when the condition is false
 	}
 
 	async function handleCreateCard(e: React.FormEvent) {
@@ -64,7 +64,7 @@ export const Deck = () => {
 			{/* separate form & alert span */}
 			<div className="form-span">
 				<form className="create-deck-form" onSubmit={handleCreateCard}>
-					<label htmlFor="title">Deck Title</label>
+					<label htmlFor="title">Card Text</label>
 					<input
 						className="input-field"
 						type="text"

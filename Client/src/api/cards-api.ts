@@ -28,7 +28,10 @@ export async function createCardApi(
 	return createdCard;
 }
 
-export async function deleteCardApi(deckId: string): Promise<Deck> {
+export async function deleteCardApi(
+	deckId: string,
+	title: string
+): Promise<Deck> {
 	const deletedCard = await fetch(`${API_URI}/decks/${deckId}`, {
 		method: "DELETE",
 	}).then((res) => res.json());
