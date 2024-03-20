@@ -1,0 +1,30 @@
+# docker-compose.yml
+version: "3"
+services:
+  client:
+    image: node:21.6-alpine
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - 127.0.0.1:5173:5173
+    working_dir: /app/Client
+    volumes:
+      - ./Client:/app/Client
+  server:
+    image: node:21.6-alpine
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - 127.0.0.1:5000:5000
+    working_dir: /app/Server
+    volumes:
+      - ./Server:/app/Server
+    networks:
+      - appNetwork
+  db:
+    image: mongo
+    networks:
+      - appNetwork
+    volumes:
+      - ./data/db:/data/db
+networks:
+  appNetwork:
+    driver: bridge
